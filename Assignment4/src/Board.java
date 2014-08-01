@@ -14,7 +14,7 @@ public class Board {
     }
 
     /**
-     * board dimension N
+     * Board dimension N
      * 
      * @return
      */
@@ -22,7 +22,7 @@ public class Board {
     }
 
     /**
-     * number of blocks out of place
+     * Number of blocks out of place
      * 
      * @return
      */
@@ -30,7 +30,7 @@ public class Board {
     }
 
     /**
-     * sum of Manhattan distances between blocks and goal
+     * Sum of Manhattan distances between blocks and goal
      * 
      * @return
      */
@@ -38,7 +38,7 @@ public class Board {
     }
 
     /**
-     * is this board the goal board?
+     * Is this board the goal board?
      * 
      * @return
      */
@@ -46,7 +46,7 @@ public class Board {
     }
 
     /**
-     * a board obtained by exchanging two adjacent blocks in the same row
+     * A board obtained by exchanging two adjacent blocks in the same row
      * 
      * @return
      */
@@ -54,13 +54,13 @@ public class Board {
     }
 
     /**
-     * does this board equal y?
+     * Does this board equal y?
      */
     public boolean equals(Object y) {
     }
 
     /**
-     * all neighboring boards
+     * All neighboring boards
      * 
      * @return
      */
@@ -68,7 +68,7 @@ public class Board {
     }
 
     /**
-     * string representation of the board (in the output format specified below)
+     * String representation of the board (in the output format specified below)
      */
     public String toString() {
     }
