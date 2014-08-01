@@ -8,6 +8,7 @@ public class Board {
     private int N;
     private int hamming;
     private int manhattan;
+    private boolean isGoal;
 
     /**
      * Construct a board from an N-by-N array of blocks (where blocks[i][j] =
@@ -20,6 +21,7 @@ public class Board {
         this.N = board.length;
         this.hamming = -1;
         this.manhattan = -1;
+        isGoal = false;
     }
 
     /**
@@ -42,7 +44,7 @@ public class Board {
     }
 
     /**
-     * Gets the total hamming cost.
+     * Gets the total hamming distances
      */
     private void getHamming() {
         if (hamming != -1)
@@ -50,10 +52,10 @@ public class Board {
         hamming = 0;
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
-                if (board[i][j] != ((N * i) + (j + 1)))
+                if (board[i][j] == 0)
+                    continue;
+                else if (board[i][j] != ((N * i) + (j + 1)))
                     hamming++;
-        hamming--;
-
     }
 
     /**
@@ -62,7 +64,23 @@ public class Board {
      * @return
      */
     public int manhattan() {
+        getManhattan();
         return this.manhattan;
+    }
+
+    /**
+     * Gets the total manhattan distances
+     */
+    private void getManhattan() {
+        if (manhattan != -1)
+            return;
+        manhattan = 0;
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++) {
+                int p = i + 1;
+                int q = j + 1;
+
+            }
     }
 
     /**
@@ -71,6 +89,20 @@ public class Board {
      * @return
      */
     public boolean isGoal() {
+        checkBoard();
+        return isGoal;
+    }
+
+    /**
+     * Checks if the board is a goal board
+     */
+    private void checkBoard() {
+        if (isGoal == true)
+            return;
+        if (manhattan() == 0)
+            isGoal = true;
+        else
+            isGoal = false;
     }
 
     /**
