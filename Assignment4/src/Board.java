@@ -77,9 +77,11 @@ public class Board {
         manhattan = 0;
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++) {
-                int p = i + 1;
-                int q = j + 1;
-
+                if (board[i][j] == 0)
+                    continue;
+                int row = (int) Math.ceil(board[i][j] * 1.0 / N) - 1;
+                int col = (board[i][j] % N == 0 ? N : board[i][j] % 3) - 1;
+                manhattan += Math.abs((row - i) + (col - j));
             }
     }
 
