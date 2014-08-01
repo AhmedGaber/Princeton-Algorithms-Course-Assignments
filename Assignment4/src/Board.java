@@ -4,6 +4,11 @@
  * 
  */
 public class Board {
+    private int[][] board;
+    private int N;
+    private int hamming;
+    private int manhattan;
+
     /**
      * Construct a board from an N-by-N array of blocks (where blocks[i][j] =
      * block in row i, column j)
@@ -11,6 +16,10 @@ public class Board {
      * @param blocks
      */
     public Board(int[][] blocks) {
+        this.board = blocks;
+        this.N = board.length;
+        this.hamming = -1;
+        this.manhattan = -1;
     }
 
     /**
@@ -19,6 +28,7 @@ public class Board {
      * @return
      */
     public int dimension() {
+        return N;
     }
 
     /**
@@ -27,6 +37,23 @@ public class Board {
      * @return
      */
     public int hamming() {
+        getHamming();
+        return this.hamming;
+    }
+
+    /**
+     * Gets the total hamming cost.
+     */
+    private void getHamming() {
+        if (hamming != -1)
+            return;
+        hamming = 0;
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (board[i][j] != ((N * i) + (j + 1)))
+                    hamming++;
+        hamming--;
+
     }
 
     /**
@@ -35,6 +62,7 @@ public class Board {
      * @return
      */
     public int manhattan() {
+        return this.manhattan;
     }
 
     /**
@@ -71,5 +99,14 @@ public class Board {
      * String representation of the board (in the output format specified below)
      */
     public String toString() {
+        // StringBuilder s = new StringBuilder();
+        // s.append(N + "\n");
+        // for (int i = 0; i < N; i++) {
+        // for (int j = 0; j < N; j++) {
+        // s.append(String.format("%2d ", tiles[i][j]));
+        // }
+        // s.append("\n");
+        // }
+        // return s.toString();
     }
 }
