@@ -111,6 +111,11 @@ public class Board {
      * @return
      */
     public Board twin() {
+        int[][] twin = this.board;
+        int temp = twin[2][1];
+        twin[2][1] = twin[2][2];
+        twin[2][2] = temp;
+        return new Board(twin);
     }
 
     /**
