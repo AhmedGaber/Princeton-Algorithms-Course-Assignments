@@ -117,6 +117,14 @@ public class Board {
      * Does this board equal y?
      */
     public boolean equals(Object y) {
+        if (y == this)
+            return true;
+        if (y == null)
+            return false;
+        if (y.getClass() != this.getClass())
+            return false;
+        Board that = (Board) y;
+        return this.board == that.board;
     }
 
     /**
@@ -131,14 +139,14 @@ public class Board {
      * String representation of the board (in the output format specified below)
      */
     public String toString() {
-        // StringBuilder s = new StringBuilder();
-        // s.append(N + "\n");
-        // for (int i = 0; i < N; i++) {
-        // for (int j = 0; j < N; j++) {
-        // s.append(String.format("%2d ", tiles[i][j]));
-        // }
-        // s.append("\n");
-        // }
-        // return s.toString();
+        StringBuilder s = new StringBuilder();
+        s.append(N + "\n");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                s.append(String.format("%2d ", board[i][j]));
+            }
+            s.append("\n");
+        }
+        return s.toString();
     }
 }
