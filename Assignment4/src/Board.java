@@ -140,6 +140,37 @@ public class Board {
      * @return
      */
     public Iterable<Board> neighbors() {
+        Stack<Board> stk = new Stack<Board>();
+        getNeighbors(stk);
+        return stk;
+    }
+
+    /**
+     * Find the four neighbor boards
+     * I like this piece of code BTW! ^_^ 
+     * @param stk
+     */
+    private void getNeighbors(Stack<Board> stk) {
+        int[][] map = { { -1, 1, 0, 0 }, { 0, 0, -1, 1 } };
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (board[i][j] == 0) {
+                    row = i;
+                    col = j;
+                    break;
+                }
+        for (int i = 0; i < 4; i++) {
+            int[][] temp = board;
+            if ((row + map[0][i] > -1) && (row + map[0][i] < N)
+                    && (col + map[1][i] > -1) && (col + map[1][i] < N)) {
+                int swap = temp[row][col];
+                temp[row][col] = temp[row + map[0][i]][col + map[1][i]];
+                temp[row + map[0][i]][col + map[1][i]] = swap;
+                stk.push(new Board(temp));
+            }
+        }
     }
 
     /**
