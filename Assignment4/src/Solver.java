@@ -1,13 +1,9 @@
-import DataStructures.BinarySearchTree.BST.Node;
-
 /**
  * 
  * @author Ahmed Gaber
  * 
  */
 public class Solver {
-
-    private boolean isSolvable;
     private Node result;
 
     private class Node implements Comparable<Node> {
@@ -50,6 +46,7 @@ public class Solver {
      * @return
      */
     public boolean isSolvable() {
+        return result != null;
     }
 
     /**
@@ -58,6 +55,9 @@ public class Solver {
      * @return
      */
     public int moves() {
+        if (result != null)
+            return result.moves;
+        return -1;
     }
 
     /**
@@ -66,6 +66,13 @@ public class Solver {
      * @return
      */
     public Iterable<Board> solution() {
+        if (result == null)
+            return null;
+        Stack<Board> stk = new Stack<Board>();
+        for (Node i = result; i != null; i = i.previous) {
+            stk.push(i.board);
+        }
+        return stk;
     }
 
     /**
