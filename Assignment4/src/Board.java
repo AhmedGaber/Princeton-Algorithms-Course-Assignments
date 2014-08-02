@@ -87,7 +87,7 @@ public class Board {
                     col = N - 1;
                 else
                     col = board[i][j] % N - 1;
-                manhattan += Math.abs((row - i) + (col - j));
+                manhattan += Math.abs(row - i) + Math.abs(col - j);
             }
     }
 
