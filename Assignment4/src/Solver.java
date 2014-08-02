@@ -111,8 +111,11 @@ public class Solver {
      * @param args
      */
     public static void main(String[] args) {
+        
         // create initial board from file
-        In in = new In(args[0]);
+        In in = new In();
+        while (in.hasNextLine()) {
+         
         int N = in.readInt();
         int[][] blocks = new int[N][N];
         for (int i = 0; i < N; i++)
@@ -130,6 +133,7 @@ public class Solver {
             StdOut.println("Minimum number of moves = " + solver.moves());
             for (Board board : solver.solution())
                 StdOut.println(board);
+        }
         }
     }
 }

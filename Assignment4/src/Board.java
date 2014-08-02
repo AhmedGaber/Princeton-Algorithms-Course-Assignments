@@ -82,7 +82,11 @@ public class Board {
                 if (board[i][j] == 0)
                     continue;
                 int row = (int) Math.ceil(board[i][j] * 1.0 / N) - 1;
-                int col = (board[i][j] % N == 0 ? N : board[i][j] % N) - 1;
+                int col = 0;
+                if (board[i][j] % N == 0)
+                    col = N - 1;
+                else
+                    col = board[i][j] % N - 1;
                 manhattan += Math.abs((row - i) + (col - j));
             }
     }
@@ -101,7 +105,7 @@ public class Board {
      * Checks if the board is a goal board
      */
     private void checkBoard() {
-        if (isGoal == true)
+        if (isGoal)
             return;
         if (manhattan() == 0)
             isGoal = true;
@@ -116,27 +120,25 @@ public class Board {
      */
     public Board twin() {
         int[][] twin = new int[N][N];
-        for (int i = 0; i < twin.length; i++) {
-            for (int j = 0; j < twin.length; j++) {
-                twin[i][j] = board[i][j];
-            }
-        }
+        copyArrays(board, twin);
+        int zeroRow = -1;
+        // find the row that contains the blank block
+        for (int i = 0; i < N && zeroRow == -1; i++)
+            for (int j = 0; j < N && zeroRow == -1; j++)
+                if (board[i][j] == 0)
+                    zeroRow = i;
 
         int i = 0;
-        int j = 1;
+        int j = 0;
         int p = 1;
-        int q = 1;
-        if (twin[i][j] == 0) {
+        if (zeroRow == 0) {
             i = 1;
             j = 0;
-        }
-        if (twin[p][q] == 0) {
-            p = 0;
-            q = 0;
+            p = 1;
         }
         int temp = twin[i][j];
-        twin[i][j] = twin[p][q];
-        twin[p][q] = temp;
+        twin[i][j] = twin[i][p];
+        twin[i][p] = temp;
         return new Board(twin);
     }
 
@@ -185,17 +187,21 @@ public class Board {
         int[][] temp = new int[N][N];
         for (int i = 0; i < 4; i++) {
             temp = new int[N][N];
-            for (int j = 0; j < temp.length; j++) {
-                for (int j2 = 0; j2 < temp.length; j2++) {
-                    temp[j][j2] = board[j][j2];
-                }
-            }
+            copyArrays(board, temp);
             if ((row + map[0][i] > -1) && (row + map[0][i] < N)
                     && (col + map[1][i] > -1) && (col + map[1][i] < N)) {
                 int swap = 0;
                 temp[row][col] = temp[row + map[0][i]][col + map[1][i]];
                 temp[row + map[0][i]][col + map[1][i]] = swap;
                 stk.push(new Board(temp));
+            }
+        }
+    }
+
+    private void copyArrays(int[][] board2, int[][] temp) {
+        for (int j = 0; j < temp.length; j++) {
+            for (int j2 = 0; j2 < temp.length; j2++) {
+                temp[j][j2] = board2[j][j2];
             }
         }
     }
