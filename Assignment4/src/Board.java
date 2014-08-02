@@ -115,7 +115,13 @@ public class Board {
      * @return
      */
     public Board twin() {
-        int[][] twin = this.board;
+        int[][] twin = new int[N][N];
+        for (int i = 0; i < twin.length; i++) {
+            for (int j = 0; j < twin.length; j++) {
+                twin[i][j] = board[i][j];
+            }
+        }
+
         int i = 0;
         int j = 1;
         int p = 1;
@@ -168,18 +174,25 @@ public class Board {
         int[][] map = { { -1, 1, 0, 0 }, { 0, 0, -1, 1 } };
         int row = 0;
         int col = 0;
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
+        boolean found = false;
+        for (int i = 0; i < N && !found; i++)
+            for (int j = 0; j < N && !found; j++)
                 if (board[i][j] == 0) {
                     row = i;
                     col = j;
-                    break;
+                    found = true;
                 }
+        int[][] temp = new int[N][N];
         for (int i = 0; i < 4; i++) {
-            int[][] temp = board;
+            temp = new int[N][N];
+            for (int j = 0; j < temp.length; j++) {
+                for (int j2 = 0; j2 < temp.length; j2++) {
+                    temp[j][j2] = board[j][j2];
+                }
+            }
             if ((row + map[0][i] > -1) && (row + map[0][i] < N)
                     && (col + map[1][i] > -1) && (col + map[1][i] < N)) {
-                int swap = temp[row][col];
+                int swap = 0;
                 temp[row][col] = temp[row + map[0][i]][col + map[1][i]];
                 temp[row + map[0][i]][col + map[1][i]] = swap;
                 stk.push(new Board(temp));
