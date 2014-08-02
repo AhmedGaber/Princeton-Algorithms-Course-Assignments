@@ -37,7 +37,37 @@ public class Solver {
      * @param initial
      */
     public Solver(Board initial) {
+        if (initial.isGoal())
+            result = new Node(initial, null);
+        else
+            result = solve(initial, initial.twin());
+    }
 
+    private Node solve(Board initial, Board twin) {
+        MinPQ<Node> mainPq = new MinPQ<Node>();
+        MinPQ<Node> twinPq = new MinPQ<Node>();
+        mainPq.insert(new Node(initial, null));
+        twinPq.insert(new Node(twin, null));
+        Node mainTemp;
+        Node twinTemp;
+        while (true) {
+            mainTemp = step(mainPq);
+            twinTemp = step(twinPq);
+            if (mainTemp.board.isGoal())
+                return mainTemp;
+            if (twinTemp.board.isGoal())
+                return null;
+
+        }
+    }
+
+    private Node step(MinPQ<Node> pq) {
+        Node temp = pq.delMin();
+        for (Board neighbor : temp.board.neighbors()) {
+            if (temp.previous == null || !neighbor.equals(temp.previous.board))
+                pq.insert(new Node(neighbor, temp));
+        }
+        return temp;
     }
 
     /**
