@@ -80,7 +80,7 @@ public class Board {
                 if (board[i][j] == 0)
                     continue;
                 int row = (int) Math.ceil(board[i][j] * 1.0 / N) - 1;
-                int col = (board[i][j] % N == 0 ? N : board[i][j] % 3) - 1;
+                int col = (board[i][j] % N == 0 ? N : board[i][j] % N) - 1;
                 manhattan += Math.abs((row - i) + (col - j));
             }
     }
