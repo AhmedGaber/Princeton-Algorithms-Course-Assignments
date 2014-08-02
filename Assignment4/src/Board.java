@@ -114,9 +114,9 @@ public class Board {
      */
     public Board twin() {
         int[][] twin = this.board;
-        int temp = twin[2][1];
-        twin[2][1] = twin[2][2];
-        twin[2][2] = temp;
+        int temp = twin[0][1];
+        twin[0][1] = twin[1][1];
+        twin[1][1] = temp;
         return new Board(twin);
     }
 
@@ -146,8 +146,8 @@ public class Board {
     }
 
     /**
-     * Find the four neighbor boards
-     * I like this piece of code BTW! ^_^ 
+     * Find the four neighbor boards. I like this piece of code BTW! ^_^
+     * 
      * @param stk
      */
     private void getNeighbors(Stack<Board> stk) {
