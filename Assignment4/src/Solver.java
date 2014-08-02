@@ -27,7 +27,11 @@ public class Solver {
         }
 
         public int compareTo(Node that) {
-            return this.priority - that.priority;
+            if (this.priority > that.priority)
+                return 1;
+            else if (this.priority < that.priority)
+                return -1;
+            return 0;
         }
     }
 
