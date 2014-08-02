@@ -19,8 +19,9 @@ public class Board {
      * @param blocks
      */
     public Board(int[][] blocks) {
-        this.board = blocks;
-        this.N = board.length;
+        this.N = blocks.length;
+        this.board = new int[N][N];
+        copyArrays(blocks, board);
         this.hamming = -1;
         this.manhattan = -1;
         isGoal = false;
@@ -153,7 +154,12 @@ public class Board {
         if (y.getClass() != this.getClass())
             return false;
         Board that = (Board) y;
-        return Arrays.equals(this.board, that.board);
+        if (this.board.length != that.board.length)
+            return false;
+        for (int row = 0; row < N; row++)
+            if (!Arrays.equals(this.board[row], that.board[row]))
+                return false;
+        return true;
     }
 
     /**
