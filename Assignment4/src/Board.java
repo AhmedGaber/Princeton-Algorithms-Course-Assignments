@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * 
  * @author Ahmed Gaber
@@ -114,9 +116,21 @@ public class Board {
      */
     public Board twin() {
         int[][] twin = this.board;
-        int temp = twin[0][1];
-        twin[0][1] = twin[1][1];
-        twin[1][1] = temp;
+        int i = 0;
+        int j = 1;
+        int p = 1;
+        int q = 1;
+        if (twin[i][j] == 0) {
+            i = 1;
+            j = 0;
+        }
+        if (twin[p][q] == 0) {
+            p = 0;
+            q = 0;
+        }
+        int temp = twin[i][j];
+        twin[i][j] = twin[p][q];
+        twin[p][q] = temp;
         return new Board(twin);
     }
 
@@ -131,7 +145,7 @@ public class Board {
         if (y.getClass() != this.getClass())
             return false;
         Board that = (Board) y;
-        return this.board == that.board;
+        return Arrays.equals(this.board, that.board);
     }
 
     /**
