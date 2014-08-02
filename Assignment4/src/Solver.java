@@ -1,3 +1,5 @@
+import DataStructures.BinarySearchTree.BST.Node;
+
 /**
  * 
  * @author Ahmed Gaber
@@ -5,12 +7,37 @@
  */
 public class Solver {
 
+    private boolean isSolvable;
+    private Node result;
+
+    private class Node implements Comparable<Node> {
+        private final Board board;
+        private final Node previous;
+        private final int moves;
+        private final int priority;
+
+        public Node(Board board, Node prev) {
+            this.board = board;
+            this.previous = prev;
+            if (previous == null)
+                this.moves = 0;
+            else
+                this.moves = previous.moves + 1;
+            this.priority = board.manhattan() + moves;
+        }
+
+        public int compareTo(Node that) {
+            return this.priority - that.priority;
+        }
+    }
+
     /**
      * Find a solution to the initial board (using the A* algorithm)
      * 
      * @param initial
      */
     public Solver(Board initial) {
+
     }
 
     /**
