@@ -19,6 +19,32 @@ public class Brute {
     }
 
     private static void doLogic(Point[] points, Draw draw, Out out) {
+        double pqSlope = 0;
+        double prSlope = 0;
+        double psSlope = 0;
+        for (int p = 0; p < points.length; p++) {
+            for (int q = p + 1; q < points.length; q++) {
+                pqSlope = points[p].slopeTo(points[q]);
+                for (int r = q + 1; r < points.length; r++) {
+                    prSlope = points[p].slopeTo(points[r]);
+                    if (pqSlope != prSlope)
+                        break;
+                    for (int s = r + 1; s < points.length; s++) {
+                        psSlope = points[p].slopeTo(points[s]);
+                        if (prSlope != psSlope)
+                            break;
+                        printResult(out, points, p, q, r, s);
+
+                    }
+                }
+            }
+        }
+    }
+
+    private static void printResult(Out out, Point[] points, int p, int q,
+            int r, int s) {
+        out.println(points[p].toString() + " -> " + points[q].toString()
+                + " -> " + points[r].toString() + " -> " + points[s].toString());
     }
 
     private static void drawPoint() {
@@ -29,4 +55,10 @@ public class Brute {
 
     }
 
+    /**
+     * Test Cases 6 19000 10000 18000 10000 32000 10000 21000 10000 1234 5678
+     * 14000 10000
+     * 
+     * 
+     */
 }
