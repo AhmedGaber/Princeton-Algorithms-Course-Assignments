@@ -28,13 +28,12 @@ public class Brute {
                 for (int r = q + 1; r < points.length; r++) {
                     prSlope = points[p].slopeTo(points[r]);
                     if (pqSlope != prSlope)
-                        break;
+                        continue;
                     for (int s = r + 1; s < points.length; s++) {
                         psSlope = points[p].slopeTo(points[s]);
                         if (prSlope != psSlope)
-                            break;
+                            continue;
                         printResult(out, points, p, q, r, s);
-
                     }
                 }
             }
@@ -56,8 +55,8 @@ public class Brute {
     }
 
     /**
-     * Test Cases 6 19000 10000 18000 10000 32000 10000 21000 10000 1234 5678
-     * 14000 10000
+     * Test Cases 
+     * 6 19000 10000 18000 10000 32000 10000 21000 10000 1234 5678 14000 10000
      * 
      * 
      */
