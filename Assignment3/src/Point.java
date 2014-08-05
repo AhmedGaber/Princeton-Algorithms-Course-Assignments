@@ -1,9 +1,21 @@
+/**
+ * 
+ * @author Ahmed Gaber
+ *
+ */
 import java.util.Comparator;
 
 public class Point implements Comparable<Point> {
 
     // compare points by slope
-    public final Comparator<Point> SLOPE_ORDER = null; // YOUR DEFINITION HERE
+    public final Comparator<Point> SLOPE_ORDER = new Comparator<Point>() {
+
+        @Override
+        public int compare(Point q, Point r) {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+    };
 
     private final int x; // x coordinate
     private final int y; // y coordinate
@@ -15,7 +27,6 @@ public class Point implements Comparable<Point> {
      * @param y
      */
     public Point(int x, int y) {
-        /* DO NOT MODIFY */
         this.x = x;
         this.y = y;
     }
@@ -37,21 +48,38 @@ public class Point implements Comparable<Point> {
     }
 
     /**
-     * Slope between this point and that point
+     * Slope between this point and that point which is given by the formula (y1
+     * - y0) / (x1 - x0). Slope of a horizontal line segment is positive zero;
+     * slope of a vertical line segment is positive infinity; slope of a
+     * degenerate line segment (between a point and itself) is negative
+     * infinity.
      * 
      * @param that
      * @return
      */
     public double slopeTo(Point that) {
-        /* YOUR CODE HERE */
+        if ((this.x == that.x) && (this.y == that.y))
+            return Double.NEGATIVE_INFINITY;
+        else if (this.x == that.x)
+            return 0.0;
+        else if (this.y == that.y)
+            return Double.POSITIVE_INFINITY;
+        return (Math.abs(this.y - that.y) * 1.0)
+                / (Math.abs(this.x - that.x) * 1.0);
     }
 
     /**
      * Is this point lexicographically smaller than that one? comparing
-     * y-coordinates and breaking ties by x-coordinates
+     * y-coordinates and breaking ties by x-coordinate. The invoking point (x0,
+     * y0) is less than the argument point (x1, y1) if and only if either y0 <
+     * y1 or if y0 = y1 and x0 < x1.
      */
     public int compareTo(Point that) {
-        /* YOUR CODE HERE */
+        if ((this.x == that.x) && (this.y == that.y))
+            return 0;
+        else if ((this.y < that.y) || ((this.y == that.y) && (this.x < that.x)))
+            return -1;
+        return 1;
     }
 
     /**
