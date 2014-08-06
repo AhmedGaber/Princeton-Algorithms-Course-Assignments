@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Brute {
 
     public static void main(String[] args) {
@@ -22,6 +24,7 @@ public class Brute {
         double pqSlope = 0;
         double prSlope = 0;
         double psSlope = 0;
+        Arrays.sort(points);
         for (int p = 0; p < points.length; p++) {
             for (int q = p + 1; q < points.length; q++) {
                 pqSlope = points[p].slopeTo(points[q]);
@@ -55,8 +58,11 @@ public class Brute {
     }
 
     /**
-     * Test Cases 
-     * 6 19000 10000 18000 10000 32000 10000 21000 10000 1234 5678 14000 10000
+     * Test Cases 6 19000 10000 18000 10000 32000 10000 21000 10000 1234 5678
+     * 14000 10000
+     * 
+     * 8 10000 0 0 10000 3000 7000 7000 3000 20000 21000 3000 4000 14000 15000
+     6000 7000
      * 
      * 
      */

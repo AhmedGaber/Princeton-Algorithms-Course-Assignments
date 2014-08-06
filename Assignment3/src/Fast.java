@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Fast {
 
     public static void main(String[] args) {
@@ -19,7 +21,11 @@ public class Fast {
     }
 
     private static void doLogic(Point[] points, Draw draw, Out out) {
-
+        double pqSlope = 0;
+        double prSlope = 0;
+        double psSlope = 0;
+        Arrays.sort(points);
+        
     }
 
     private static void drawPoint() {
