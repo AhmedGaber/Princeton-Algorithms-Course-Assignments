@@ -23,29 +23,35 @@ public class Fast {
 
     private static void doLogic(Point[] points, Out out) {
         ArrayList<Point> arr = new ArrayList<Point>();
+        ArrayList<Point> doneArr = new ArrayList<Point>();
         for (int i = 0; i < points.length - 1; i++) {
+            arr.clear();
             Point origin = points[i];
             Arrays.sort(points, i + 1, points.length, origin.SLOPE_ORDER);
             double slope = origin.slopeTo(points[i + 1]);
             arr.add(origin);
             for (int j = i + 1; j < points.length; j++) {
-                if(origin.slopeTo(points[j]) == slope)
+                if (origin.slopeTo(points[j]) == slope)
                     arr.add(points[j]);
                 else
                     slope = origin.slopeTo(points[j]);
             }
-            if(arr.size() > 3)
+            arr.removeAll(doneArr);
+            if (arr.size() > 3)
                 printResult(out, arr);
+            for (int j = 0; j < arr.size(); j++) {
+                doneArr.add(arr.get(j));
+            }
         }
     }
 
-    private static void printResult(Out out, ArrayList<Point> arr){
+    private static void printResult(Out out, ArrayList<Point> arr) {
         Collections.sort(arr);
-        for (int i = 0; i < arr.size(); i++) {
-            out.print(arr.get(i).toString()+ " -> ");   
+        for (int i = 0; i < arr.size() - 1; i++) {
+            out.print(arr.get(i).toString() + " -> ");
         }
-        System.out.println();
-        arr.get(0).drawTo(arr.get(arr.size()-1));
+        out.println(arr.get(arr.size() - 1).toString());
+        arr.get(0).drawTo(arr.get(arr.size() - 1));
     }
 
     /**
