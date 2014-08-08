@@ -4,28 +4,25 @@ public class Brute {
 
     public static void main(String[] args) {
         In in = new In();
-        Draw draw = new Draw();
-        draw.setXscale(0, 32768);
         Out out = new Out();
-        Point[] points = getInput(in);
-        doLogic(points, draw, out);
-    }
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        StdDraw.setPenRadius(0.004);
 
-    private static Point[] getInput(In in) {
         int n = in.readInt();
         Point[] points = new Point[n];
         for (int i = 0; i < n; i++) {
             points[i] = new Point(in.readInt(), in.readInt());
             points[i].draw();
         }
-        return points;
+
+        doLogic(points, out);
     }
 
-    private static void doLogic(Point[] points, Draw draw, Out out) {
+    private static void doLogic(Point[] points, Out out) {
         double pqSlope = 0;
         double prSlope = 0;
         double psSlope = 0;
-        Arrays.sort(points);
         for (int p = 0; p < points.length; p++) {
             for (int q = p + 1; q < points.length; q++) {
                 pqSlope = points[p].slopeTo(points[q]);
@@ -46,16 +43,13 @@ public class Brute {
 
     private static void printResult(Out out, Point[] points, int p, int q,
             int r, int s) {
-        out.println(points[p].toString() + " -> " + points[q].toString()
-                + " -> " + points[r].toString() + " -> " + points[s].toString());
-    }
 
-    private static void drawPoint() {
-
-    }
-
-    private static void drawLine() {
-
+        Point[] temp = new Point[] { points[p], points[q], points[r], points[s] };
+        Arrays.sort(temp);
+        temp[0].drawTo(temp[3]);
+        temp[0].drawTo(temp[3]);
+        out.println(temp[0].toString() + " -> " + temp[1].toString() + " -> "
+                + temp[2].toString() + " -> " + temp[3].toString());
     }
 
     /**
@@ -63,7 +57,7 @@ public class Brute {
      * 14000 10000
      * 
      * 8 10000 0 0 10000 3000 7000 7000 3000 20000 21000 3000 4000 14000 15000
-     6000 7000
+     * 6000 7000
      * 
      * 
      */
