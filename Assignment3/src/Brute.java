@@ -7,7 +7,6 @@ public class Brute {
         Out out = new Out();
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-        StdDraw.setPenRadius(0.004);
 
         int n = in.readInt();
         Point[] points = new Point[n];
