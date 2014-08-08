@@ -16,6 +16,7 @@ public class Brute {
         Point[] points = new Point[n];
         for (int i = 0; i < n; i++) {
             points[i] = new Point(in.readInt(), in.readInt());
+            points[i].draw();
         }
         return points;
     }
