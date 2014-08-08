@@ -9,11 +9,15 @@ public class Point implements Comparable<Point> {
 
     // compare points by slope
     public final Comparator<Point> SLOPE_ORDER = new Comparator<Point>() {
-
         @Override
         public int compare(Point q, Point r) {
-            // TODO Auto-generated method stub
-            return 0;
+            double s1 = slopeTo(q);
+            double s2 = slopeTo(r);
+            if (s1 == s2)
+                return 0;
+            if (s1 > s2)
+                return 1;
+            return -1;
         }
     };
 
@@ -61,9 +65,9 @@ public class Point implements Comparable<Point> {
         if ((this.x == that.x) && (this.y == that.y))
             return Double.NEGATIVE_INFINITY;
         else if (this.x == that.x)
-            return 0.0;
-        else if (this.y == that.y)
             return Double.POSITIVE_INFINITY;
+        else if (this.y == that.y)
+            return 0.0;
         return (Math.abs(this.y - that.y) * 1.0)
                 / (Math.abs(this.x - that.x) * 1.0);
     }
