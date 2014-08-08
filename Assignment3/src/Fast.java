@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Fast {
 
@@ -20,20 +22,30 @@ public class Fast {
     }
 
     private static void doLogic(Point[] points, Out out) {
-        double pqSlope = 0;
-        double prSlope = 0;
-        double psSlope = 0;
-
+        ArrayList<Point> arr = new ArrayList<Point>();
+        for (int i = 0; i < points.length - 1; i++) {
+            Point origin = points[i];
+            Arrays.sort(points, i + 1, points.length, origin.SLOPE_ORDER);
+            double slope = origin.slopeTo(points[i + 1]);
+            arr.add(origin);
+            for (int j = i + 1; j < points.length; j++) {
+                if(origin.slopeTo(points[j]) == slope)
+                    arr.add(points[j]);
+                else
+                    slope = origin.slopeTo(points[j]);
+            }
+            if(arr.size() > 3)
+                printResult(out, arr);
+        }
     }
 
-    private static void printResult(Out out, Point[] points, int p, int q,
-            int r, int s) {
-
-        Point[] temp = { points[p], points[q], points[r], points[s] };
-        Arrays.sort(temp);
-        temp[0].drawTo(temp[3]);
-        out.println(temp[0].toString() + " -> " + temp[1].toString() + " -> "
-                + temp[2].toString() + " -> " + temp[3].toString());
+    private static void printResult(Out out, ArrayList<Point> arr){
+        Collections.sort(arr);
+        for (int i = 0; i < arr.size(); i++) {
+            out.print(arr.get(i).toString()+ " -> ");   
+        }
+        System.out.println();
+        arr.get(0).drawTo(arr.get(arr.size()-1));
     }
 
     /**
