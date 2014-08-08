@@ -44,9 +44,8 @@ public class Brute {
     private static void printResult(Out out, Point[] points, int p, int q,
             int r, int s) {
 
-        Point[] temp = new Point[] { points[p], points[q], points[r], points[s] };
+        Point[] temp = { points[p], points[q], points[r], points[s] };
         Arrays.sort(temp);
-        temp[0].drawTo(temp[3]);
         temp[0].drawTo(temp[3]);
         out.println(temp[0].toString() + " -> " + temp[1].toString() + " -> "
                 + temp[2].toString() + " -> " + temp[3].toString());
