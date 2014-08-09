@@ -9,7 +9,6 @@ public class Fast {
         Out out = new Out();
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-        
         int n = in.readInt();
         Point[] points = new Point[n];
         for (int i = 0; i < n; i++) {
