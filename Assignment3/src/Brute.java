@@ -18,6 +18,12 @@ public class Brute {
         doLogic(points, out);
     }
 
+    /**
+     * Just do four nested iterations over the array ( costs O(N^4))
+     * 
+     * @param points
+     * @param out
+     */
     private static void doLogic(Point[] points, Out out) {
         double pqSlope = 0;
         double prSlope = 0;
@@ -49,15 +55,4 @@ public class Brute {
         out.println(temp[0].toString() + " -> " + temp[1].toString() + " -> "
                 + temp[2].toString() + " -> " + temp[3].toString());
     }
-
-    /**
-     * Test Cases
-     * 
-     * 6 19000 10000 18000 10000 32000 10000 21000 10000 1234 5678 14000 10000
-     * 
-     * 8 10000 0 0 10000 3000 7000 7000 3000 20000 21000 3000 4000 14000 15000
-     * 6000 7000
-     * 
-     * 
-     */
 }
