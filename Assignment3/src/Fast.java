@@ -1,7 +1,14 @@
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * 
+ * @author Ahmed Gaber
+ * @Date yoom el natega!
+ *
+ */
 public class Fast {
 
     public static void main(String[] args) {
